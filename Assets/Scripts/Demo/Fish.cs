@@ -115,12 +115,12 @@ public class Fish : MonoBehaviour
         float stopper = Mathf.Sin(Time.time * period + seed * 0.006f) + Mathf.Sin(Time.time  + seed * 0.006f+1.521f);
               stopper = smoothstep(-1.0f, 1.0f, stopper);
 
-        if (rg.velocity.magnitude <3.0f + shouldFlee*7.0f)
+        if (rg.linearVelocity.magnitude <3.0f + shouldFlee*7.0f)
         rg.AddForce(forceD.normalized * 1.0f * (stopper + shouldFlee*4.0f));
 
-        this.transform.forward = Vector3.Lerp(this.transform.forward, rg.velocity, 0.4f);
+        this.transform.forward = Vector3.Lerp(this.transform.forward, rg.linearVelocity, 0.4f);
 
-        float movementSpeed = Mathf.Clamp01((rg.velocity.magnitude * 5.0f + rg.angularVelocity.magnitude) / 5.0f);
+        float movementSpeed = Mathf.Clamp01((rg.linearVelocity.magnitude * 5.0f + rg.angularVelocity.magnitude) / 5.0f);
         materialTime += Mathf.Lerp(0.0f, 0.4f, movementSpeed);
 
         materialTime = materialTime % 10000.0f;
